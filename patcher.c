@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "payload.h"
+#include "globlevar.h"
 
 FILE *romfile;
 FILE *outfile;
@@ -162,18 +163,19 @@ int main(int argc, char **argv)
 	// little endian assumed, deal with it
 
     unsigned long new_entry_offset = 0x20;
-    unsigned long origin_entry_offset = 0x0;
+    unsigned long origin_entry_offset = 0xc;
 	unsigned long new_entrypoint_address = 0x08000000 + payload_base + new_entry_offset;
-
+    GlobleVar *globleVar = (GlobleVar*)(rom+payload_base);
     printf("entry new_entry_offset %x payload base  %x\n",new_entry_offset, payload_base);
 
-    *(uint32_t*)(rom + payload_base + origin_entry_offset) = original_entrypoint_address;
+    globleVar->origin_entry = original_entrypoint_address;
+    // *(uint32_t*)(rom + payload_base + origin_entry_offset) = original_entrypoint_address;
 	0[(uint32_t*) rom] = 0xea000000 | (new_entrypoint_address - 0x08000008) >> 2;
 
     printf("b instr is:%x\n",0[(uint32_t*) rom]);
     printf("my_entry in file offset %x\n",payload_base + new_entry_offset);
     printf("my_entry in GBA offset %x\n",new_entrypoint_address);
-    printf("origin entry offset in file:%x\n",payload_base + origin_entry_offset);
+    // printf("origin entry offset in file:%x\n",payload_base + origin_entry_offset);
 
 
 	// Flush all changes to new file
