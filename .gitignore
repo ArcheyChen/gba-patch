@@ -1,0 +1,7 @@
+*.gba
+*.sav
+*.elf
+*.o
+*.bin
+patch
+
