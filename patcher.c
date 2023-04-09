@@ -161,8 +161,8 @@ int main(int argc, char **argv)
 	printf("Original offset was %lx, original entrypoint was %lx\n", original_entrypoint_offset, original_entrypoint_address);
 	// little endian assumed, deal with it
 
-    unsigned long new_entry_offset = 0x10;
-    unsigned long origin_entry_offset = 0x44;
+    unsigned long new_entry_offset = 0x20;
+    unsigned long origin_entry_offset = 0x0;
 	unsigned long new_entrypoint_address = 0x08000000 + payload_base + new_entry_offset;
 
     printf("entry new_entry_offset %x payload base  %x\n",new_entry_offset, payload_base);
