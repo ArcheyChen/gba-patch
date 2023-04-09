@@ -1,8 +1,7 @@
-# arm-none-eabi-as -mcpu=arm7tdmi payload.s -o payload.elf
-# arm-none-eabi-objcopy -O binary payload.elf payload.bin
+rm -f *.o *.elf *.bin *.s
 
-# arm-none-eabi-gcc -mcpu=arm7tdmi myentry.c -Os -static -nostartfiles -fno-use-cxa-atexit   -o myentry.elf
 arm-none-eabi-gcc -mcpu=arm7tdmi myentry.c -Os -static -fPIC -nostartfiles -c -o myentry.o
+arm-none-eabi-gcc -mcpu=arm7tdmi myentry.c -Os -static -fPIC -nostartfiles -S -o myentry.s
 arm-none-eabi-ld -T mylink.ld myentry.o -o myentry.elf
 arm-none-eabi-objcopy -O binary myentry.elf myentry.bin
 

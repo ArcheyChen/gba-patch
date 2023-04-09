@@ -162,7 +162,7 @@ int main(int argc, char **argv)
 	// little endian assumed, deal with it
 
     unsigned long new_entry_offset = 0x10;
-    unsigned long origin_entry_offset = 0x50;
+    unsigned long origin_entry_offset = 0x44;
 	unsigned long new_entrypoint_address = 0x08000000 + payload_base + new_entry_offset;
 
     printf("entry new_entry_offset %x payload base  %x\n",new_entry_offset, payload_base);
