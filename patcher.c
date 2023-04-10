@@ -162,14 +162,12 @@ int main(int argc, char **argv)
 	printf("Original offset was %lx, original entrypoint was %lx\n", original_entrypoint_offset, original_entrypoint_address);
 	// little endian assumed, deal with it
 
-    unsigned long new_entry_offset = 0x10;
-    unsigned long origin_entry_offset = 0xc;
+    unsigned long new_entry_offset = sizeof(GlobleVar);
 	unsigned long new_entrypoint_address = 0x08000000 + payload_base + new_entry_offset;
     GlobleVar *globleVar = (GlobleVar*)(rom+payload_base);
     printf("entry new_entry_offset %x payload base  %x\n",new_entry_offset, payload_base);
 
-    // globleVar->origin_entry = original_entrypoint_address;
-    *(uint32_t*)(rom + payload_base + origin_entry_offset) = original_entrypoint_address;
+    globleVar->origin_entry = original_entrypoint_address;
 	0[(uint32_t*) rom] = 0xea000000 | (new_entrypoint_address - 0x08000008) >> 2;
 
     printf("b instr is:%x\n",0[(uint32_t*) rom]);
