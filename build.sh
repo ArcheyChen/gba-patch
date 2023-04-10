@@ -1,8 +1,9 @@
 rm -f *.o *.elf *.bin *.s
 
 arm-none-eabi-gcc -mcpu=arm7tdmi myentry.c -Os -static -fPIC -nostartfiles -c -o myentry.o
+arm-none-eabi-gcc -mcpu=arm7tdmi mypatch.c -Os -static -fPIC -nostartfiles -c -o mypatch.o
 arm-none-eabi-gcc -mcpu=arm7tdmi myentry.c -Os -static -fPIC -nostartfiles -S -o myentry.s
-arm-none-eabi-ld -T mylink.ld myentry.o -o myentry.elf
+arm-none-eabi-ld -T mylink.ld myentry.o mypatch.o -o myentry.elf
 arm-none-eabi-objcopy -O binary myentry.elf myentry.bin
 
 xxd -i -n payload_bin myentry.bin > payload.h
