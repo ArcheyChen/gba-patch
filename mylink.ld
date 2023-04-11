@@ -5,7 +5,6 @@ SECTIONS
     .data :
     {
         *(MY_GLOBLE_VAR)
-        *(MY_ENTRY)
     }
     .text :
     {

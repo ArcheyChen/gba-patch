@@ -9,9 +9,8 @@ typedef volatile signed short vs16;
 
 typedef struct GLOBLE_VAR_STRUCT
 {
-    vu32 flash_save_addr;
-    vu32 idle_irq_handler;
-    vu32 keypad_irq_handler;
     vu32 origin_entry;
+    vu32 patch_entry;
+    vu32 flash_save_addr;
 }GlobleVar;
 #endif
